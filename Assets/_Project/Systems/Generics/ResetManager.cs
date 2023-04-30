@@ -7,7 +7,7 @@ public class ResetManager : MonoBehaviour
 {
     [Header("To Assign")]
     public Transition tr;
-    public Transform egg;
+    public Player.Egg.BaseScript egg;
     private bool resetBegun;
     // Start is called before the first frame update
     void Start()
