@@ -9,7 +9,7 @@ namespace Player
         public class Movement : MonoBehaviour
         {
             [Header("To Assign")]
-            public GameObject bob;
+            public GameObject birdModel;
 
             [Header("Internal Settings")]
             public float speed = 5f;
@@ -32,6 +32,8 @@ namespace Player
 
                 if (Mathf.Abs(moveDelta.x) + Mathf.Abs(moveDelta.y) > 1) {moveDelta = new Vector2(Mathf.Sign(moveDelta.x) * Mathf.Sqrt(Mathf.Abs(moveDelta.x) / 2f), Mathf.Sign(moveDelta.y) * Mathf.Sqrt(Mathf.Abs(moveDelta.y) / 2f)); }
 
+                if (moveDelta.x > 0) { birdModel.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f); }
+                if (moveDelta.x < 0) { birdModel.transform.localScale = new Vector3(0.3f, 0.3f, -0.3f); }
 
                 transform.position += new Vector3(moveDelta.x, moveDelta.y) * speed * Time.deltaTime;
 
