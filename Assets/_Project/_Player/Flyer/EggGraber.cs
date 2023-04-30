@@ -32,26 +32,19 @@ namespace Player
                 isEggInGrabbingRangeBelow = (isSomethingInGrabbingRangeBelow && hit.transform.gameObject.GetComponent<Egg.BaseScript>());
 
                 if (Input.GetKeyDown(KeyCode.Space) && isEggInGrabbingRangeBelow){
-                    /*grabbedEgg = true;
-                    egg = hit.transform.gameObject.GetComponent<Egg.BaseScript>();
-                    egg.GetComponent<Rigidbody2D>().isKinematic = true;
-                    egg.GetComponent<Collider2D>().isTrigger = true;
-                    egg.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-
-                    Debug.Log(hit.distance);*/
+                    dummyEgg.gameObject.SetActive(true);
                     trueEgg.gameObject.SetActive(false);
-                }
-
-                if (grabbedEgg) {
-                    
+                    grabbedEgg = true;
                 }
 
                 if (Input.GetKeyUp(KeyCode.Space) && grabbedEgg) {
-                    trueEgg.gameObject.SetActive(false);
-                    /*grabbedEgg = false;
-                    egg.GetComponent<Rigidbody2D>().isKinematic = false;
-                    egg.GetComponent<Collider2D>().isTrigger = false;
-                    egg = null;*/
+                    dummyEgg.gameObject.SetActive(false);
+                    trueEgg.gameObject.SetActive(true);
+
+                    trueEgg.transform.position = dummyEgg.transform.position;
+                    trueEgg.transform.localEulerAngles = Vector3.zero;
+                        
+                    grabbedEgg = false;
                 }
             }
         }

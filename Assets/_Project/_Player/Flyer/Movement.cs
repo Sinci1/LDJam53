@@ -14,6 +14,7 @@ namespace Player
             [Header("General")]
             public bool shouldMovingAnimBeOn;
             public bool isPlayerGoingDown;
+            public bool pauseMovement;
 
             [Header("Internal Settings")]
             public float speed = 5f;
