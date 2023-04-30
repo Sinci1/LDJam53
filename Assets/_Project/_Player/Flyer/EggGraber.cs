@@ -33,16 +33,18 @@ namespace Player
                     grabbedEgg = true;
                     egg = hit.transform.gameObject.GetComponent<Egg.BaseScript>();
                     egg.GetComponent<Rigidbody2D>().isKinematic = true;
+                    egg.GetComponent<Collider2D>().isTrigger = true;
                     egg.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 }
 
                 if (grabbedEgg) {
-                    egg.transform.position = transform.position + (Vector3.down * 1.1f);
+                    egg.transform.position = transform.position + (Vector3.down * 1.3f);
                 }
 
                 if (Input.GetKeyUp(KeyCode.Space) && grabbedEgg) {
                     grabbedEgg = false;
                     egg.GetComponent<Rigidbody2D>().isKinematic = false;
+                    egg.GetComponent<Collider2D>().isTrigger = false;
                     egg = null;
                 }
             }
