@@ -12,10 +12,12 @@ namespace Player
             public GameObject birdModel;
 
             [Header("General")]
-            public bool isMovingOnXAxis;
+            public bool shouldMovingAnimBeOn;
+            public bool isPlayerGoingDown;
 
             [Header("Internal Settings")]
             public float speed = 5f;
+
 
             void Update()
             {
@@ -33,9 +35,12 @@ namespace Player
                 if (moveDelta.x > 0) { birdModel.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f); }
                 if (moveDelta.x < 0) { birdModel.transform.localScale = new Vector3(0.3f, 0.3f, -0.3f); }
 
-                isMovingOnXAxis = Mathf.Abs(moveDelta.x) > 0;
+                shouldMovingAnimBeOn = (Mathf.Abs(moveDelta.x) > 0 && moveDelta.y <= 0);
+                isPlayerGoingDown = moveDelta.y < 0;
 
-                transform.position += new Vector3(moveDelta.x, moveDelta.y) * speed * Time.deltaTime;
+
+                gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero + (moveDelta * speed);
+                //transform.position += new Vector3(moveDelta.x, moveDelta.y) * speed * Time.deltaTime;
             }
         }
     }

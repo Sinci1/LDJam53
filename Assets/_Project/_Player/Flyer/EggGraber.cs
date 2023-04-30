@@ -37,7 +37,7 @@ namespace Player
                 }
 
                 if (grabbedEgg) {
-                    egg.transform.position = transform.position + Vector3.down;
+                    egg.transform.position = transform.position + (Vector3.down * 1.1f);
                 }
 
                 if (Input.GetKeyUp(KeyCode.Space) && grabbedEgg) {

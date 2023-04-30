@@ -17,6 +17,9 @@ namespace Player
             [Header("General")]
             public MoveAnimState currentState;
             public enum MoveAnimState {FlyingStill, FsToFmTransitioning, FlyingMoving, FmToFsTransitioning }
+            private float secondsUntilPlayAnimation = 0.2f;
+            private float fmWingIntensity;
+            private float fmWingIntensitySpeed = 1.5f;
 
             private void Awake()
             {
@@ -28,15 +31,39 @@ namespace Player
             // Update is called once per frame
             void Update()
             {
-                if (currentState == MoveAnimState.FlyingStill && movement.isMovingOnXAxis) {
-                    Initiate_FStoFM();
-                    currentState = MoveAnimState.FsToFmTransitioning;
+                UP_ChangingFlyingAnimations();
+                UP_WalkingAnimations();
+            }
+
+            void UP_ChangingFlyingAnimations() {
+                //if the animation is Still, but the player is Moving, then begin the animation. However wait a bit, and if the player stops moving then don't call the animation
+                if (currentState == MoveAnimState.FlyingStill && movement.shouldMovingAnimBeOn)
+                {
+                    Invoke("Initiate_FStoFM", secondsUntilPlayAnimation);
+                }
+                if (currentState == MoveAnimState.FlyingStill && !movement.shouldMovingAnimBeOn) { CancelInvoke("Initiate_FStoFM"); }
+
+                //this is to control the wing intensinty
+                if (currentState == MoveAnimState.FlyingMoving)
+                {
+                    if (!movement.isPlayerGoingDown) { fmWingIntensity += fmWingIntensitySpeed * Time.deltaTime; }
+                    if (movement.isPlayerGoingDown) { fmWingIntensity -= fmWingIntensitySpeed * Time.deltaTime; }
+                    fmWingIntensity = Mathf.Clamp(fmWingIntensity, 0f, 1f);
+                    anim.SetFloat("FMWingIntensity", fmWingIntensity);
                 }
 
-                if (currentState == MoveAnimState.FlyingMoving && !movement.isMovingOnXAxis){
-                    Initiate_FMtoFS();
-                    currentState = MoveAnimState.FmToFsTransitioning;
+                //same as above
+                if (currentState == MoveAnimState.FlyingMoving && !movement.shouldMovingAnimBeOn)
+                {
+                    Invoke("Initiate_FMtoFS", secondsUntilPlayAnimation);
                 }
+                if (currentState == MoveAnimState.FlyingMoving && movement.shouldMovingAnimBeOn) { CancelInvoke("Initiate_FMtoFS"); }
+            }
+
+            void UP_WalkingAnimations() {
+                RaycastHit2D hit = Physics2D.BoxCast(transform.position, (Vector2.one), 0f, Vector2.down, 0.5f, ~LayerMask.GetMask("Player", "Egg"));
+                bool GroundBelow = (hit.collider != null);
+                
             }
 
 
@@ -46,7 +73,8 @@ namespace Player
 
            //Flying (Still) to Flying (Moving)
             public void Initiate_FStoFM(){
-                anim.CrossFade(FlyingStillToFlyingMoveTransitionAnimation, 0f);
+                anim.CrossFade(FlyingStillToFlyingMoveTransitionAnimation, 0.25f);
+                currentState = MoveAnimState.FsToFmTransitioning;
             }
             public void FStoFM_Finished() {
                 currentState = MoveAnimState.FlyingMoving;
@@ -54,7 +82,8 @@ namespace Player
 
            //Flying (Moving) to Flying (Still)
             public void Initiate_FMtoFS(){
-                anim.CrossFade(FlyingMovingToFlyingStillTransitionAnimation, 0f);
+                anim.CrossFade(FlyingMovingToFlyingStillTransitionAnimation, 0.25f);
+                currentState = MoveAnimState.FmToFsTransitioning;
             }
             public void FMtoFS_Finished() {
                 currentState = MoveAnimState.FlyingStill;
