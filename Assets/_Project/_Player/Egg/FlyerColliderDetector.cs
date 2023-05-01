@@ -9,7 +9,8 @@ namespace Player
         public class FlyerColliderDetector : MonoBehaviour
         {
             [Header("Player Collider Settings")]
-            public Vector2 size;
+            public Vector2 size = new Vector2(3f, 1f);
+            public Vector3 eggSize = new Vector3(0.25f, 0.4f, 0.25f); //Vector3 because it's not symmetrical on the Y axis, so X = normal, Y = distance from center to up, Z = distance from center to down
 
             [Header("Checks")]
             [SerializeField] private bool centerCheck;
@@ -30,26 +31,26 @@ namespace Player
                 //we preform the checks to see if there are colliders nearby
                 centerCheck = (Physics2D.OverlapAreaAll(pos + dividedSize, pos - dividedSize, ~LayerMask.GetMask("Egg", "Player")).Length <= 0);
 
-                upCheck = (Physics2D.OverlapAreaAll(new Vector2(pos.x - dividedSize.x, pos.y + size.y), new Vector2(pos.x + dividedSize.x, pos.y + size.y), ~LayerMask.GetMask("Egg", "Player")).Length <= 0);
-                downCheck = (Physics2D.OverlapAreaAll(new Vector2(pos.x - dividedSize.x, pos.y - size.y), new Vector2(pos.x + dividedSize.x, pos.y - size.y), ~LayerMask.GetMask("Egg", "Player")).Length <= 0);
-                rightCheck = (Physics2D.OverlapAreaAll(new Vector2(pos.x + size.x, pos.y - dividedSize.y), new Vector2(pos.x + size.x, pos.y + dividedSize.y), ~LayerMask.GetMask("Egg", "Player")).Length <= 0);
-                leftCheck = (Physics2D.OverlapAreaAll(new Vector2(pos.x - size.x, pos.y - dividedSize.y), new Vector2(pos.x - size.x, pos.y + dividedSize.y), ~LayerMask.GetMask("Egg", "Player")).Length <= 0);
+                upCheck = (Physics2D.OverlapAreaAll(new Vector2(pos.x - dividedSize.x, pos.y), new Vector2(pos.x + dividedSize.x, pos.y + size.y), ~LayerMask.GetMask("Egg", "Player", "IgnoreGrabIgnoreCheck", "UnignoreGrabIgnoreCheck")).Length <= 0);
+                downCheck = (Physics2D.OverlapAreaAll(new Vector2(pos.x - dividedSize.x, pos.y), new Vector2(pos.x + dividedSize.x, pos.y - size.y), ~LayerMask.GetMask("Egg", "Player", "IgnoreGrabIgnoreCheck", "UnignoreGrabIgnoreCheck")).Length <= 0);
+                rightCheck = (Physics2D.OverlapAreaAll(new Vector2(pos.x, pos.y - dividedSize.y), new Vector2(pos.x + size.x, pos.y + dividedSize.y), ~LayerMask.GetMask("Egg", "Player", "IgnoreGrabIgnoreCheck", "UnignoreGrabIgnoreCheck")).Length <= 0);
+                leftCheck = (Physics2D.OverlapAreaAll(new Vector2(pos.x, pos.y - dividedSize.y), new Vector2(pos.x - size.x, pos.y + dividedSize.y), ~LayerMask.GetMask("Egg", "Player", "IgnoreGrabIgnoreCheck", "UnignoreGrabIgnoreCheck")).Length <= 0);
 
-                upRightCheck = (Physics2D.OverlapAreaAll(pos, new Vector2(pos.x + size.x, pos.y + size.y), ~LayerMask.GetMask("Egg", "Player")).Length <= 0);
-                upLeftCheck = (Physics2D.OverlapAreaAll(pos, new Vector2(pos.x - size.x, pos.y + size.y), ~LayerMask.GetMask("Egg", "Player")).Length <= 0);
-                downRightCheck = (Physics2D.OverlapAreaAll(pos, new Vector2(pos.x + size.x, pos.y - size.y), ~LayerMask.GetMask("Egg", "Player")).Length <= 0);
-                downLeftCheck = (Physics2D.OverlapAreaAll(pos, new Vector2(pos.x - size.x, pos.y - size.y), ~LayerMask.GetMask("Egg", "Player")).Length <= 0);
+                upRightCheck = (Physics2D.OverlapAreaAll(pos, new Vector2(pos.x + size.x, pos.y + size.y), ~LayerMask.GetMask("Egg", "Player", "IgnoreGrabIgnoreCheck", "UnignoreGrabIgnoreCheck")).Length <= 0);
+                upLeftCheck = (Physics2D.OverlapAreaAll(pos, new Vector2(pos.x - size.x, pos.y + size.y), ~LayerMask.GetMask("Egg", "Player", "IgnoreGrabIgnoreCheck", "UnignoreGrabIgnoreCheck")).Length <= 0);
+                downRightCheck = (Physics2D.OverlapAreaAll(pos, new Vector2(pos.x + size.x, pos.y - size.y), ~LayerMask.GetMask("Egg", "Player", "IgnoreGrabIgnoreCheck", "UnignoreGrabIgnoreCheck")).Length <= 0);
+                downLeftCheck = (Physics2D.OverlapAreaAll(pos, new Vector2(pos.x - size.x, pos.y - size.y), ~LayerMask.GetMask("Egg", "Player", "IgnoreGrabIgnoreCheck", "UnignoreGrabIgnoreCheck")).Length <= 0);
 
                 //positions
-                if (upRightCheck) { teleportPosition = new Vector2(pos.x + dividedSize.x, pos.y + dividedSize.y); }
-                if (upLeftCheck) { teleportPosition = new Vector2(pos.x - dividedSize.x, pos.y + dividedSize.y); }
+                if (upRightCheck) { teleportPosition = new Vector2(pos.x + dividedSize.x - eggSize.x, pos.y + dividedSize.y - eggSize.z); }
+                if (upLeftCheck) { teleportPosition = new Vector2(pos.x - dividedSize.x + eggSize.x, pos.y + dividedSize.y - eggSize.z); }
                 if (downRightCheck) { teleportPosition = new Vector2(pos.x + dividedSize.x, pos.y - dividedSize.y); }
                 if (downLeftCheck) { teleportPosition = new Vector2(pos.x - dividedSize.x, pos.y - dividedSize.y); }
 
-                if (upCheck) { teleportPosition = new Vector2(pos.x, pos.y + dividedSize.y); }
+                if (upCheck) { teleportPosition = new Vector2(pos.x, pos.y + dividedSize.y - eggSize.z); }
                 if (downCheck) { teleportPosition = new Vector2(pos.x, pos.y - dividedSize.y); }
-                if (rightCheck) { teleportPosition = new Vector2(pos.x + dividedSize.x, pos.y); }
-                if (leftCheck) { teleportPosition = new Vector2(pos.x - dividedSize.x, pos.y); }
+                if (rightCheck) { teleportPosition = new Vector2(pos.x + dividedSize.x - eggSize.x, pos.y); }
+                if (leftCheck) { teleportPosition = new Vector2(pos.x - dividedSize.x + eggSize.x, pos.y); }
 
                 if (centerCheck) { teleportPosition = pos; }
 
