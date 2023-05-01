@@ -194,6 +194,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: eggmodel
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 45a9671292f19f74f90fdc1a1bfcb5b4, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45a9671292f19f74f90fdc1a1bfcb5b4, type: 3}
 --- !u!4 &74590191 stripped
@@ -289,7 +293,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.012673616, y: -0.042152762}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -300,7 +304,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.939055, y: 0.9994447}
+  m_Size: {x: 3, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &202543688
 MonoBehaviour:
@@ -2547,8 +2551,9 @@ GameObject:
   - component: {fileID: 1972138166}
   - component: {fileID: 1972138165}
   - component: {fileID: 1972138164}
+  - component: {fileID: 1972138171}
   - component: {fileID: 1972138170}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Egg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2657,6 +2662,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanWindPush: 1
+--- !u!114 &1972138171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1972138163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c367b3ec30fb4ae4b9d280e8f96257ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: {x: 3, y: 1}
+  centerCheck: 0
+  upRightCheck: 0
+  upLeftCheck: 0
+  downRightCheck: 0
+  downLeftCheck: 0
 --- !u!1 &1974731710
 GameObject:
   m_ObjectHideFlags: 0
