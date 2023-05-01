@@ -21,10 +21,11 @@ namespace Player
             // Update is called once per frame
             void Update()
             {
-                RaycastHit2D hit = Physics2D.BoxCast(transform.position, (Vector2.one), 0f, Vector2.down, 0.5f, ~LayerMask.GetMask("Player", "Unnestable"));
-                bool isNestingThingBelow = (hit.collider != null);
+                RaycastHit2D hit = Physics2D.BoxCast(transform.position, (Vector2.one), 0f, Vector2.down, 0.5f, ~LayerMask.GetMask("Player", "IgnoreGrab"));
+                bool isPlatformBelow = (hit.collider != null && hit.transform.GetComponent<PlatformGeneralInfo>());
+                bool isPlatformNestable = (isPlatformBelow && hit.transform.GetComponent<PlatformGeneralInfo>().CanBeNestedOn);
 
-                if (Input.GetKeyDown(KeyCode.F) && isNestingThingBelow) {
+                if (Input.GetKeyDown(KeyCode.F) && isPlatformNestable) {
                     Vector3 playerPos = transform.position;
                     Vector3 eggPos = egg.transform.position;
 

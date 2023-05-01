@@ -15,6 +15,7 @@ namespace Player
             public bool shouldMovingAnimBeOn;
             public bool isPlayerGoingDown;
             public bool pauseMovement;
+            public Vector2 pushVelocity;
 
             [Header("Internal Settings")]
             public float speed = 5f;
@@ -22,7 +23,7 @@ namespace Player
 
             void Update()
             {
-                Vector2 moveDelta = Vector3.zero;
+                Vector2 moveDelta = Vector2.zero;
 
                 if (Input.GetKey(KeyCode.W)) { moveDelta += Vector2.up; }
                 if (Input.GetKey(KeyCode.A)) { moveDelta -= Vector2.right; }
@@ -40,7 +41,7 @@ namespace Player
                 isPlayerGoingDown = moveDelta.y < 0;
 
 
-                gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero + (moveDelta * speed);
+                gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero + pushVelocity + (moveDelta * speed);
                 //transform.position += new Vector3(moveDelta.x, moveDelta.y) * speed * Time.deltaTime;
             }
         }
