@@ -26,7 +26,7 @@ namespace Player
             // Update is called once per frame
             void Update()
             {
-                RaycastHit2D hit = Physics2D.BoxCast(transform.position, (Vector2.one), 0f, Vector2.down, 0.5f, ~LayerMask.GetMask("Player", "IgnoreGrabIgnoreCheck", "IgnoreGrabUnignoreCheck"));
+                RaycastHit2D hit = Physics2D.BoxCast(transform.position, (Vector2.one), 0f, Vector2.down, 0.5f, ~LayerMask.GetMask("Player", "IgnoreGrabIgnoreCheck", "IgnoreGrabUnignoreCheck", "ANTIEGG"));
 
                 isSomethingInGrabbingRangeBelow = (hit.collider != null);
                 isEggInGrabbingRangeBelow = (isSomethingInGrabbingRangeBelow && hit.transform.gameObject.GetComponent<Egg.BaseScript>());

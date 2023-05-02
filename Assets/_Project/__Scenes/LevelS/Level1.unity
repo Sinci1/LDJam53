@@ -1328,7 +1328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   circle: {fileID: 579520425}
   circleTransition: {fileID: 1904402703}
-  circleSpeed: 1
+  circleSpeed: 1.5
   circleType: 1
 --- !u!1 &829378291
 GameObject:
@@ -1670,7 +1670,7 @@ RectTransform:
   m_GameObject: {fileID: 970217779}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1102578432}
@@ -1678,7 +1678,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 100.25}
+  m_AnchoredPosition: {x: 0, y: 400}
   m_SizeDelta: {x: 439.38, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &970217781
@@ -1884,10 +1884,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1680, y: 1050}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -2856,7 +2856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tr: {fileID: 751877990}
-  egg: {fileID: 1369908244}
+  egg: {fileID: 1369908245}
 --- !u!4 &2076585456
 Transform:
   m_ObjectHideFlags: 0

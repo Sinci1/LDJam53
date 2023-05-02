@@ -21,7 +21,7 @@ namespace Player
             // Update is called once per frame
             void Update()
             {
-                RaycastHit2D hit = Physics2D.BoxCast(transform.position, (Vector2.one), 0f, Vector2.down, 0.5f, ~LayerMask.GetMask("Player", "IgnoreGrabIgnoreCheck", "IgnoreGrabUni0gnoreCheck"));
+                RaycastHit2D hit = Physics2D.BoxCast(transform.position, (Vector2.one), 0f, Vector2.down, 0.5f, ~LayerMask.GetMask("Player", "IgnoreGrabIgnoreCheck", "IgnoreGrabUni0gnoreCheck", "ANTIEGG"));
                 Vector2 teleportPos = egg.transform.position;
                 bool isPlatformBelow = (hit.collider != null && hit.transform.GetComponent<PlatformGeneralInfo>());
                 bool isPlatformNestable = (isPlatformBelow && hit.transform.GetComponent<PlatformGeneralInfo>().CanBeNestedOn);
