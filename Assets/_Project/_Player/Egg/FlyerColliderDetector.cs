@@ -57,28 +57,7 @@ namespace Player
                 //the end
                 return (centerCheck || upCheck || downCheck || rightCheck || leftCheck || upRightCheck || upLeftCheck || downRightCheck || downLeftCheck);
             }
-            private void OnDrawGizmos()
-            {
-                if (UnityEditor.EditorApplication.isPlaying)
-                {
-                    Vector3 pos = transform.position;
-                    Vector3 dividedSize = size / 2;
 
-                    Gizmos.color = Color.red;
-                    if (upRightCheck) { Gizmos.color = Color.green; } Gizmos.DrawWireCube(new Vector2(pos.x + dividedSize.x, pos.y + dividedSize.y), size); Gizmos.color = Color.red;
-                    if (upLeftCheck) { Gizmos.color = Color.green; } Gizmos.DrawWireCube(new Vector2(pos.x - dividedSize.x, pos.y + dividedSize.y), size); Gizmos.color = Color.red;
-                    if (downRightCheck) { Gizmos.color = Color.green; }  Gizmos.DrawWireCube(new Vector2(pos.x + dividedSize.x, pos.y - dividedSize.y), size); Gizmos.color = Color.red;
-                    if (downLeftCheck) { Gizmos.color = Color.green; } Gizmos.DrawWireCube(new Vector2(pos.x - dividedSize.x, pos.y - dividedSize.y), size); Gizmos.color = Color.red;
-
-                    if (upCheck) { Gizmos.color = Color.green; } Gizmos.DrawWireCube(new Vector2(pos.x, pos.y + dividedSize.y), size); Gizmos.color = Color.red;
-                    if (downCheck) { Gizmos.color = Color.green; } Gizmos.DrawWireCube(new Vector2(pos.x, pos.y - dividedSize.y), size); Gizmos.color = Color.red;
-                    if (rightCheck) { Gizmos.color = Color.green; } Gizmos.DrawWireCube(new Vector2(pos.x + dividedSize.x, pos.y), size); Gizmos.color = Color.red;
-                    if (leftCheck) { Gizmos.color = Color.green; } Gizmos.DrawWireCube(new Vector2(pos.x - dividedSize.x, pos.y), size); Gizmos.color = Color.red;
-
-                    if (centerCheck) { Gizmos.color = Color.green; } Gizmos.DrawWireCube(pos, size); Gizmos.color = Color.red;
-
-                }
-            }
         }
     }
 }
