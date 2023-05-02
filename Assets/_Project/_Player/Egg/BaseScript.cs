@@ -8,16 +8,16 @@ namespace Player
     {
         public class BaseScript : MonoBehaviour
         {
-            // Start is called before the first frame update
-            void Start()
-            {
+            public bool canTeleport = true;
+            public MeshRenderer dummyEggRenderer;
 
-            }
+            public Material fireMat;
+            public Material cooledMat;
 
-            // Update is called once per frame
-            void Update()
-            {
-
+            public void WaterFalled() {
+                canTeleport = false;
+                gameObject.GetComponentInChildren<MeshRenderer>().material = cooledMat;
+                dummyEggRenderer.material = cooledMat;
             }
         }
     }
